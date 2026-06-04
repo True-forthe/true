@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>True 서버에 오신것을 환영합니다.</title>
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #05070a;
+    background-image: radial-gradient(circle at 50% 50%, #0d121f 0%, #05070a 100%);
+}
+/* ------------------------------
+   좌측 공중에 둥둥 떠 있는 플로팅 사이드바
+------------------------------ */
+.sidebar {
+    font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+    box-sizing: border-box;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 260px;
+    height: calc(100vh - 40px);
+    background: rgba(15, 20, 30, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    backdrop-filter: blur(20px);
+    transition: all 0.3s ease;
+}
+.sidebar-logo {
+    box-sizing: border-box;
+    padding: 25px 20px 20px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.sidebar-logo svg {
+    height: 64px;
+    width: auto;
+    vertical-align: middle;
+}
+.sidebar-menu {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: none; /* Firefox */
+}
+.sidebar-menu::-webkit-scrollbar {
+    display: none !important; /* Chrome, Safari */
+}
+.sidebar-menu a {
+    box-sizing: border-box;
+    color: #cbd5e1;
+    padding: 12px 25px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-left: 4px solid transparent;
+    transition: 0.25s ease;
+}
+.sidebar-menu a:hover, .sidebar-menu a.active {
+    color: #fff;
+    background: rgba(236, 33, 39, 0.08);
+    border-left: 4px solid #ec2127;
+    text-shadow: 0 0 10px rgba(236, 33, 39, 0.5);
+}
+.sidebar-footer {
+    padding: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: #475569;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ------------------------------
+   우측 공중에 떠 있는 플로팅 콘텐츠 프레임
+------------------------------ */
+#mainFrame {
+    position: absolute;
+    top: 20px;
+    left: 300px; /* 사이드바 가로 260px + 여백 20px + 시작여백 20px = 300px */
+    width: calc(100% - 320px); /* 좌우 여백 20px씩 차감 */
+    height: calc(100% - 40px); /* 상하 여백 20px씩 차감 */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    background-color: #080b10;
+    transition: all 0.3s ease;
+}
+
+/* ------------------------------
+   모바일 반응형 플로팅 처리
+------------------------------ */
+@media screen and (max-width: 1024px) {
+    .sidebar {
+        top: 10px !important;
+        left: 10px !important;
+        width: calc(100% - 20px) !important;
+        height: 60px !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        border-radius: 12px !important;
+        padding: 0 !important;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+    }
+    .sidebar-logo {
+        padding: 0 15px !important;
+        border-bottom: none !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.06) !important;
+        height: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+    .sidebar-logo svg {
+        height: 48px !important;
+    }
+    .sidebar-menu {
+        flex-direction: row !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        white-space: nowrap !important;
+        align-items: center !important;
+        height: 100% !important;
+    }
+    .sidebar-menu a {
+        padding: 0 15px !important;
+        font-size: 14px !important;
+        height: 100% !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        border-left: none !important;
+        border-bottom: 3px solid transparent !important;
+    }
+    .sidebar-menu a:hover, .sidebar-menu a.active {
+        border-left: none !important;
+        border-bottom: 3px solid #ec2127 !important;
+    }
+    .sidebar-footer {
+        display: none !important;
+    }
+    #mainFrame {
+        top: 80px !important; /* 상단 플로팅 바 60px + 마진 10px + 상단 마진 10px */
+        left: 10px !important;
+        width: calc(100% - 20px) !important;
+        height: calc(100% - 90px) !important; /* 상하 마진 고려 */
+        border-radius: 12px !important;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+    <div class="sidebar-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="-60.6249 -36.69825 525.4158 220.1895" style="height: 60px; width: auto; vertical-align: middle;">
+            <path d="M150.555 28.683h-4.69c-26.59 0-48.107 21.487-48.107 48.145v68.615h34.656V78.505c0-10.053 8.073-18.059 18.141-18.059h20.262V28.683zm174.438 45.704c.371-10.795 10.35-19.557 22.704-19.557 12.568 0 22.614 8.665 22.792 19.557zm79.143 16.167c-.26-36.147-19.921-64.6-56.44-64.6-31.324 0-56.684 25.344-56.684 60.237 0 37.647 23.03 59.935 56.937 60.602 22.02 0 41.289-12.36 51.12-30.516l-31.711-8.295c-3.858 5.773-11.24 9.78-19.661 9.78-12.354 0-22.333-8.867-22.704-19.618h79.143c.067-1.691 0-5.802 0-7.59m-154.25 7.753c0 9.905-8.08 18.104-18.17 18.104-9.986 0-17.985-8.199-17.985-18.104v-52.9c0-9.208-7.449-16.724-16.76-16.724h-18.059v65.091c0 29.307 15.855 53.02 52.804 53.02 37.045 0 52.849-23.713 52.849-53.02v-65.09h-34.679v69.623M51.01 0H16.36v28.683H0v31.763h16.36v37.23c0 29.181 23.616 47.767 52.782 47.767h20.455v-30.39H69.09c-9.972 0-18.081-8.117-18.081-18.089V60.446l22.71-.082c8.837-.378 15.878-7.627 15.878-16.649V28.683H51.009V0" fill="#ec2127" fill-rule="evenodd"/>
+        </svg>
+    </div>
+                <div class="sidebar-menu">
+        <a href="home.html" target="main-frame" class="active">홈</a>
+        <a href="notice.html" target="main-frame">공지사항</a>
+        <a href="doll.html" target="main-frame">마법인형</a>
+        <a href="maan.html" target="main-frame">마안정보</a>
+        <a href="item.html" target="main-frame">아이템정보</a>
+        <a href="feature.html" target="main-frame">간편기능</a>
+        <a href="promo.html" target="main-frame">홍보안내</a>
+        <a href="service.html" target="main-frame">고객센터</a>
+        <a href="security.html" target="main-frame">보안 설정(필수)</a>
+        <a href="download.html" target="main-frame">다운로드</a>
+    </div>
+    <div class="sidebar-footer">
+        <span>© 2026 True Server</span>
+    </div>
+</div>
+
+<iframe name="main-frame" id="mainFrame" src="home.html"></iframe>
+
+<script>
+    function updateActiveMenu(href) {
+        const links = document.querySelectorAll('.sidebar-menu a');
+        links.forEach(link => {
+            const linkHref = link.getAttribute('href');
+            if (linkHref === href) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
+
+    // iframe 내부의 경로가 변경될 때마다 활성화 상태 싱크
+    document.addEventListener("DOMContentLoaded", () => {
+        const iframe = document.getElementById("mainFrame");
+        iframe.addEventListener("load", () => {
+            try {
+                const currentPath = iframe.contentWindow.location.pathname.split('/').pop() || 'home.html';
+                updateActiveMenu(currentPath);
+            } catch (e) {
+                // 크로스오리진 에러 무시
+            }
+        });
+    });
+</script>
+</body>
+</html>
