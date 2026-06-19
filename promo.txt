@@ -111,7 +111,7 @@
 
 트루서버 홈페이지
 
-https://true-forthe.github.io/
+https://true-forthe.github.io/true/index.html
 
 트루서버 텔레그램 링크
 https://t.me/truesv
